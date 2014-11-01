@@ -1,0 +1,34 @@
+The available classes are:
+ i) DigramMatrix (class file: digramatrix.py)
+ - 
+ - 
+
+API calls for classes
+i) ** DigramMatrix  **
+ API Name: init
+ - Description: class initializer
+ - Parameters: name(str)
+
+ API Name: learn
+ - Description: build the matrix from a body of text.
+ - Parameters: text(str)
+
+ API Name: swap_rows
+ - Description: swap two rows in the matrix
+ - Parameters: row01(str), row02(str)
+
+ API Name: swap_cols
+ - Description: swap two cols in the matrix
+ - Parameters: col01(str), col02(str)
+
+ API Name: compare_to
+ - Description: compares two digram matrices
+ - Parameters: class_instance
+
+ API Name: get_name
+ - Description: returns the name of the matrix
+ - Parameters: none
+
+ API Name: print_string
+ - Description: outputs the key/value pairs to console
+ - Parameters: none

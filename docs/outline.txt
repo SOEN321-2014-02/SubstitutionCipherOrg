@@ -1,0 +1,6 @@
+This project is to build an application that decrypts cipher text contructed using a substitution cipher.
+
+The most efficient method to attack a substitution cipher is by using language frequency analysis.
+
+Wikipedia Reference: http://en.wikipedia.org/wiki/Substitution_cipher
+

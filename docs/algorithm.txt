@@ -1,0 +1,35 @@
+Drafted from "A Fast Method for Crytanalysis of Substitution Ciphers" by Thomas Kajobsen
+-----------------------------------------------------------------------------------------
+
+I translate it into English steps as
+i) Import an English language frequency matrix (26 char plus space)
+
+ii) Create a guess key matrix called k 
+  - (OPTIONAL) create the guess by:
+   - calculating the single character frequency matrix for the ciphertext
+   - comparing English single character matrix to ciphertext single character matrix 
+
+iii) Calculate the Digram frequency matrix for the decrypted ciphertext
+
+iv) Perform a matrix addition function on the ciphertext Digram frequency matrix  and the English Digram frequency matrix and assign result to v
+
+v) take the guess key k and copy it to a second variable called k'
+
+vi) take the ciphertext Digram frequency matrix called D and copy it to a new variable called D'
+
+vii) Use the swapping algorithm to swap two element in the guess key k' 
+
+viii) swap rows and columns in D' (it says corresponding but I'm not clear on what we are corresponding with?)
+
+ix)  Perform a matrix addition function on the D' ciphertext Digram frequency matrix and the English Digram frequency matrix and assign result to v'
+
+x) Compare v' and v' and go back to step v) if v' is greater or equal to v, if v' is less than v continue to step xi)
+
+xi) assigned v' to v
+
+xii) assign k' to k
+
+xiii) assign D' to D
+
+xiv) go back to step vii) and perform the swap again
+
