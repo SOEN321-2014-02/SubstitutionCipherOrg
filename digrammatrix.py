@@ -8,7 +8,8 @@ Last-update:  2014-10-18
 Python Ver: 3.4.1
 IDE: PhyCharm 3.4.1
 '''
-# from and import statements
+
+#import statements
 import numpy
 import utils
 

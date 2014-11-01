@@ -9,6 +9,9 @@ Python Ver: 3.4.1
 IDE: PhyCharm 3.4.1
 '''
 
+#import statements
+
+
 def char_to_ascii(char):
     #convert alpha-numeric character to ascii code (32 to space)
     ascii = 0

@@ -1,6 +1,7 @@
 __author__ = 'SOEN321-2014-02 Group: Connor Bode, Sid the Banzai Master, Eric Bozikian, Norman Mirotchnick'
 '''
 File: main.py
+Description: Main file for substitution cipher decryption project
 File version:  0.0.1
 Date-created: 2014-09-28
 Last-update:  2014-09-28
@@ -8,7 +9,7 @@ Python Ver: 3.4.1
 IDE: PhyCharm 3.4.1
 '''
 
-#from and import statements
+#import statements
 from digrammatrix import DigramMatrix
 import sys
 
@@ -40,7 +41,7 @@ english_language_matrix = DigramMatrix("Ciphertext")
 #english_language_matrix.learn("this is some text that I am including at")  # test with text
 english_language_matrix.learn(file_text)  # use text from file
 
-#* Debug - print matrix contents for
+#* Debug - print matrix contents for ciphertext
 english_language_matrix.print_string()
 
 
