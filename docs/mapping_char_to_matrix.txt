@@ -1,0 +1,49 @@
+Characters used in plaintext, ciphertext, and substitution matrix
+[space], a to z
+
+total 27
+----------------------
+
+mapping characters to ascii:
+  [space] = 32 dec, 20 hex
+  a(lower) = 97 dec, 61 hex
+  b(lower) = 98 dec, 62 hex
+  ....
+  z(lower) = 122 dec, 7A hex
+----------------------
+
+mapping chars to array
+  [0] = [space]
+  [1] = a
+  [2] = b
+  ...
+  [26] = z
+----------------------
+
+mapping ascii to array
+  [0] = 32
+  [1] = 97
+  [2] = 98
+  ...
+  [26] = 122
+----------------------
+
+storing chars in bigram array:
+  array element [0][0] = [space],[space] = 32,32
+  array element [0][1] = [space],a = 32,97
+  array element [0][2] = [space],b = 32,98
+  ....
+  array element [1][0] = a,[space] = 98,32
+  ....
+  array element [26][0] = z,[space] = 122,32
+  ....
+  array element [26][26] = z,z = 122,122
+----------------------
+
+calculating ascii to array
+  [0] = (32 - 64) mod 32 = 0
+  [1] = (97 - 64) mod 32 = 1
+  [2] = (98 - 64) mod 32 = 2
+  ...
+  [26] = (122 - 64) mod 32 = 26
+----------------------

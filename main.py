@@ -12,31 +12,35 @@ IDE: PhyCharm 3.4.1
 from digrammatrix import DigramMatrix
 import sys
 
-file_name = "digrammatrix.py"
+#initialize file_name
+file_name = ""
+file_name = "ciphertext.txt"   #*Debug - filename for importing
 
 #get filename from command line arguments
 if len(sys.argv) > 1:
     file_name = sys.argv[1]
     print(file_name)
-'''
 else:
-    print("Filename required")
-    exit()
-'''
+    if file_name is "":
+        print("Filename required")
+        exit()
 
 #open file for reading
 file_to_read_object = open(file_name, 'r')
+#read text from file
+file_text = file_to_read_object.read()
+
 
 ## algorithm steps ##
 # i) Import an English language frequency matrix (26 char plus space)
-
 #create english language digram frequency matrix
-english_language_matrix = DigramMatrix("English")
+english_language_matrix = DigramMatrix("Ciphertext")
 
 #send text to matrix
-english_language_matrix.learn("this is some text that I am including at")
+#english_language_matrix.learn("this is some text that I am including at")  # test with text
+english_language_matrix.learn(file_text)  # use text from file
 
-#print matrix contents
+#* Debug - print matrix contents for
 english_language_matrix.print_string()
 
 

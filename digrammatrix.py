@@ -10,17 +10,17 @@ IDE: PhyCharm 3.4.1
 '''
 # from and import statements
 import numpy
+import utils
 
 
 class DigramMatrix:
     #define class variables
-
+      # none
 
     def __init__(self, name):
         #define instance variables
         self.name = name  #matrix name
         self.matrix = [[0]*27 for i in range(27)]  # option 1
-
 
         '''
         # Alternative ways of initializing the matrix with sets
@@ -45,8 +45,8 @@ class DigramMatrix:
         #build the matrix given body of text
         print("Learning")
         #is text length odd? add extra padding character
-        if len(text) % 2 is not 0:
-            text += "-"
+        #if len(text) % 2 is not 0:
+        #    text += "-"
 
         #get the character pairs
         counter = 0  #initialize counter
@@ -54,13 +54,11 @@ class DigramMatrix:
             char01 = text[counter].lower()
             char02 = text[counter+1].lower()
             # print(char01 + ":" + char02)
-            #does this pair already exist in the dictionary?
-            if char01 in self.matrix and char02 in self.matrix[char01]:
-                #enter pair count into dictionary
-                self.matrix[char01][char02] += 1
-            else:
-                #create new entry
-                self.matrix[char01][char02] = 1
+
+            #increment the counter for this pair
+            self.matrix[utils.char_to_element(char01)][utils.char_to_element(char02)] += 1
+
+            #increment the while loop counter
             counter += 1
 
     def swap_rows(self, row01, row02):
@@ -76,16 +74,9 @@ class DigramMatrix:
         print("Comparing")
 
     def print_string(self):
-        for key in sorted(self.matrix):
-            value = self.matrix[key]
-            print("------")
-            if key[0] is " ":
-                key00 = "_"
-            else:
-                key00 = key[0]
-            if key[1] is " ":
-                key01 = "_"
-            else:
-                key01 = key[1]
-            print (key00+key01 + " | " + str(value))
-        print("------")
+        for key01 in range(len(self.matrix)):
+            for key02 in range(len(self.matrix)):
+                value = self.matrix[key01][key02]
+                print("-------")
+                print (utils.element_to_char(key01) + "," + utils.element_to_char(key02) + " | " + str(value))
+            print("-------")
