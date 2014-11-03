@@ -81,3 +81,19 @@ class DigramMatrix:
                 print("-------")
                 print (utils.element_to_char(key01) + "," + utils.element_to_char(key02) + " | " + str(value))
             print("-------")
+
+    def print_table(self):
+        #print top row with column headers
+        print("  | ", end="")
+        for key01 in range(len(self.matrix)):
+            print(str(key01) + " | ", end="")
+        print(" ")
+
+        #print each row
+        for key01 in range(len(self.matrix)):
+            print (str(key01) + " | ", end="")
+            for key02 in range(len(self.matrix)):
+                value = self.matrix[key01][key02]
+                print (str(value) + " | ", end="")
+            print(" ")
+            print("-----------------------------------------------------------------------------------------------------------------")

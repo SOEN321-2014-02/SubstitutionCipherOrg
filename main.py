@@ -11,6 +11,7 @@ IDE: PhyCharm 3.4.1
 
 #import statements
 from digrammatrix import DigramMatrix
+from substitutionkey import SubstitutionKey
 import sys
 
 #initialize file_name
@@ -37,13 +38,16 @@ file_text = file_to_read_object.read()
 #create english language digram frequency matrix
 english_language_matrix = DigramMatrix("Ciphertext")
 
+#create substitution key
+#sub_key = SubstitutionKey("Key")
+
 #send text to matrix
 #english_language_matrix.learn("this is some text that I am including at")  # test with text
 english_language_matrix.learn(file_text)  # use text from file
 
 #* Debug - print matrix contents for ciphertext
-english_language_matrix.print_string()
-
+#english_language_matrix.print_string()
+english_language_matrix.print_table()
 
 # ii) Create a guess key matrix called k
   # - (OPTIONAL) create the guess by:
