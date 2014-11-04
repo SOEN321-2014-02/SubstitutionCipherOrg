@@ -16,7 +16,7 @@ import sys
 
 #initialize file_name
 file_name = ""
-'file_name = "ciphertext.txt"   #*Debug - filename for importing
+#file_name = "ciphertext.txt"   #*Debug - filename for importing
 
 #get filename from command line arguments
 if len(sys.argv) > 1:
