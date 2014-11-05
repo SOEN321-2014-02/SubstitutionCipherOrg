@@ -23,5 +23,8 @@ class TestDigramMatrix(unittest.TestCase):
         self.test_matrix = DigramMatrix("Test")  # object to use for testing
 
     def test_learn(self):
-        self.test_matrix.learn("abcdefg")
-	
+        m = self.test_matrix
+        m.learn("abab")
+        self.assertEqual(m.get("a", "b"), 2)
+        self.assertEqual(m.get("b", "a"), 1)
+

@@ -61,6 +61,11 @@ class DigramMatrix:
             #increment the while loop counter
             counter += 1
 
+    def get(self, row, col):
+        row_code = utils.char_to_element(row)
+        col_code = utils.char_to_element(col)
+        return self.matrix[row_code][col_code]
+
     def swap_rows(self, row01, row02):
         #swap two rows
         print("Swapping Rows")
