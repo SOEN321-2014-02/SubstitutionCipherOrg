@@ -9,8 +9,12 @@ class Guess:
         self.listOfUniqueCharactersInLanguage = listOfUniqueCharactersInLanguage
         self.__buildOneToOneMappingOfCharacters()
 
-    def set(self, initialGuessMatrix):
-        return 1
+    def setGuess(self, guessDictionary):
+        self.guessKey =  guessDictionary
+
+    def setListOfUniqueCharactersInLanguage(self, listOfUniqueCharactersInLanguage):
+        self.uniqueCharactersInLanguage = len(listOfUniqueCharactersInLanguage)
+        self.listOfUniqueCharactersInLanguage = listOfUniqueCharactersInLanguage
 
     def randomGuessAllCharacters(self):
         self.guessKey = {}
