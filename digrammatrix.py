@@ -10,7 +10,6 @@ IDE: PhyCharm 3.4.1
 '''
 
 #import statements
-import numpy
 import utils
 
 
@@ -79,7 +78,7 @@ class DigramMatrix:
             for key02 in range(len(self.matrix)):
                 value = self.matrix[key01][key02]
                 print("-------")
-                print (utils.element_to_char(key01) + "," + utils.element_to_char(key02) + " | " + str(value))
+                print(utils.element_to_char(key01) + "," + utils.element_to_char(key02) + " | " + str(value))
             print("-------")
 
     def print_table(self):
@@ -94,6 +93,6 @@ class DigramMatrix:
             print (str(key01) + " | ", end="")
             for key02 in range(len(self.matrix)):
                 value = self.matrix[key01][key02]
-                print (str(value) + " | ", end="")
+                print(str(value) + " | ", end="")
             print(" ")
             print("-----------------------------------------------------------------------------------------------------------------")
