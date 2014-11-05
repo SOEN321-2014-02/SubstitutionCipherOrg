@@ -61,3 +61,23 @@ class TestSubstitutionKey(unittest.TestCase):
         self.assertEqual(key.decrypt("test"), "test")
         self.assertEqual(key.decrypt("TEst"), "test")  # test for decrypting uppercase strings
 
+    def test_swap(self):
+        key = self.test_key
+        key.swap('s', 'b')
+        self.assertEqual(key.decrypt("test"), "tebt")
+
+    def test_swap2(self):
+        key = self.test_key
+        key.swap("t", "a")
+        self.assertEqual(key.decrypt("test"), "aesa")
+        key.swap("t", "e")
+        self.assertEqual(key.decrypt("test"), "ease")
+
+    def test_swap3(self):
+        key = self.test_key
+        first = key.keyValues['a']
+        second = key.keyValues['b']
+        key.swap('a', 'b')
+        self.assertEqual(first, key.keyValues['b'])
+        self.assertEqual(second, key.keyValues['a'])
+
