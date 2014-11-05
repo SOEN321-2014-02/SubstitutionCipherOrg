@@ -44,6 +44,13 @@ class TestDigramMatrix(unittest.TestCase):
         self.assertEqual(m.get("b", "a"), 2)
 
 
+class TestUtils(unittest.TestCase):
+
+    def test_normalize(self):
+        self.assertEqual(utils.normalize("S.L.O.,"), "slo")
+        self.assertEqual(utils.normalize("isâ€”that"), "isthat")
+
+
 class TestSubstitutionKey(unittest.TestCase):
 
     def setUp(self):
@@ -53,3 +60,4 @@ class TestSubstitutionKey(unittest.TestCase):
         key = self.test_key
         self.assertEqual(key.decrypt("test"), "test")
         self.assertEqual(key.decrypt("TEst"), "test")  # test for decrypting uppercase strings
+

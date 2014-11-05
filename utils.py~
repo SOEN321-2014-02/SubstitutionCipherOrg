@@ -58,9 +58,7 @@ def element_to_ascii(element):
 # [a-z]
 def normalize(text):
     normalized_text = ''
-    accepted_chars = ' abcdefghijklmnopqrstuvwxyz'
+    accepted chars = ' abcdefghijklmnopqrstuvwxyz'
     text = text.lower()
     for c in text:
-        if c in accepted_chars:
-            normalized_text += c
-    return normalized_text
+        
