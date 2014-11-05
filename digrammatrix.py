@@ -42,13 +42,6 @@ class DigramMatrix:
         return self.name
 
     def learn(self, text):
-        #build the matrix given body of text
-        print("Learning")
-        #is text length odd? add extra padding character
-        #if len(text) % 2 is not 0:
-        #    text += "-"
-
-        #get the character pairs
         counter = 0  #initialize counter
         while counter < len(text)-1:
             char01 = text[counter].lower()

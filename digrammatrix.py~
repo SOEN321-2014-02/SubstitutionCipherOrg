@@ -42,11 +42,6 @@ class DigramMatrix:
         return self.name
 
     def learn(self, text):
-        #build the matrix given body of text
-        print("Learning")
-        #is text length odd? add extra padding character
-        #if len(text) % 2 is not 0:
-        #    text += "-"
 
         #get the character pairs
         counter = 0  #initialize counter
@@ -69,15 +64,14 @@ class DigramMatrix:
     def swap(self, first, second):
         f = utils.char_to_element(first)
         s = utils.char_to_element(second)
-        print("f:" + str(f))
-       # for i in range(27):
-       #     tmp = self.matrix[i][f]
-       #     self.matrix[i][f] = self.matrix[i][s]
-       #     self.matrix[i][s] = tmp
-       # for i in range(27):
-       #     tmp = self.matrix[f][i]
-       #     self.matrix[f][i] = self.matrix[s][i]
-       #     self.matrix[s][i] = tmp
+        for i in range(27):
+            tmp = self.matrix[i][f]
+            self.matrix[i][f] = self.matrix[i][s]
+            self.matrix[i][s] = tmp
+        for i in range(27):
+            tmp = self.matrix[f][i]
+            self.matrix[f][i] = self.matrix[s][i]
+            self.matrix[s][i] = tmp
 
     def compare_to(self, digrammatrix):
         s = 0
