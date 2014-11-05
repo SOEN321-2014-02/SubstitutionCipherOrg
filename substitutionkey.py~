@@ -32,8 +32,10 @@ class SubstitutionKey:
         return newString
 
 
-    def update_key(self, character, value):
-        return 1
+    def swap(self, character, value):
+        tempValue = self.keyValues[character]
+        self.keyValues[character] = value
+        self.keyValues[value] = tempValue
 
 
     def reset_key(self):

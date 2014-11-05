@@ -36,6 +36,13 @@ class TestDigramMatrix(unittest.TestCase):
         m2.learn("abaa")
         self.assertEqual(m.compare_to(m2), 2)
 
+    def test_swap(self):
+        m = self.test_matrix
+        m.learn("abab")
+        m.swap("a", "b")
+        self.assertEqual(m.get("a", "b"), 1)
+        self.assertEqual(m.get("b", "a"), 2)
+
 
 class TestSubstitutionKey(unittest.TestCase):
 
@@ -45,4 +52,36 @@ class TestSubstitutionKey(unittest.TestCase):
     def test_decrypt(self):
         key = self.test_key
         self.assertEqual(key.decrypt("test"), "test")
-        self.assertEqual(key.decrypt("TEst"), "test")
+        self.assertEqual(key.decrypt("TEst"), "test")  # test for decrypting uppercase strings
+
+    def test_swap(self):
+        key = self.test_key
+        key.swap('s', 'b')
+        self.assertEqual(key.decrypt("test"), "tebt")
+
+    def test_swap2(self):
+        key = self.test_key
+        key.swap("t", "a")
+        self.assertEqual(key.decrypt("test"), "aesa")
+        key.swap("t", "e")
+        self.assertEqual(key.decrypt("test"), "ease")
+
+# orig
+# t => t 
+# e => e
+# s => s
+# a => a
+#
+# swap (t, a)
+# t => a
+# e => e
+# s => s
+# a => t
+# 
+# swap (t, e)
+# t => e
+# e => a
+# 
+
+# 
+# 
