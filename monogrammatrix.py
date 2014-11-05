@@ -5,11 +5,9 @@ class MonogramMatrix:
     #	languageFileToBuildFrequencyMatrix is an already opened, readable file object
     def __init__(self, languageFileToBuildFrequencyMatrix):
         self.matrix = {}
-        self.learn(languageFileToBuildFrequencyMatrix)
+        self.__learn(languageFileToBuildFrequencyMatrix)
 
-    #Arguments:
-    #	languageFileToBuildFrequencyMatrix is an already opened, readable file object
-    def learn(self, languageFileToBuildFrequencyMatrix):
+    def __learn(self, languageFileToBuildFrequencyMatrix):
         #read the file by breaking it down by line
         for line in languageFileToBuildFrequencyMatrix:
             #now break the line down into individual characters
