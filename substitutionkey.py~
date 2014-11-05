@@ -25,10 +25,11 @@ class SubstitutionKey:
 
 
     def decrypt(self, oldString):
-	    newString = ""
-	    for c in oldString:
-		    newString += self.keyValues[c]
-	    return newString
+        lowerCaseString = oldString.lower()
+        newString = ""
+        for c in lowerCaseString:
+            newString += self.keyValues[c]
+        return newString
 
 
     def update_key(self, character, value):
