@@ -66,13 +66,17 @@ class DigramMatrix:
         col_code = utils.char_to_element(col)
         return self.matrix[row_code][col_code]
 
-    def swap_rows(self, row01, row02):
-        #swap two rows
-        print("Swapping Rows")
-
-    def swap_cols(self, col01, col02):
-        #swap two columns
-        print("Swapping Columns")
+    def swap(self, first, second):
+        f = utils.char_to_element(first)
+        s = utils.char_to_element(second)
+        for i in range(27):
+            tmp = self.matrix[i][f]
+            self.matrix[i][f] = self.matrix[i][s]
+            self.matrix[i][s] = tmp
+        for i in range(27):
+            tmp = self.matrix[f][i]
+            self.matrix[f][i] = self.matrix[s][i]
+            self.matrix[s][i] = tmp
 
     def compare_to(self, digrammatrix):
         s = 0
