@@ -43,8 +43,9 @@ class Guess:
         return self.guessKey
 
     def __swapRows(self, row1, row2):
-        self.guessKey[self.listOfUniqueCharactersInLanguage[row1]] = self.listOfUniqueCharactersInLanguage[row2]
-        self.guessKey[self.listOfUniqueCharactersInLanguage[row2]] = self.listOfUniqueCharactersInLanguage[row1]
+        tempForSwap = self.guessKey[self.listOfUniqueCharactersInLanguage[row1]]
+        self.guessKey[self.listOfUniqueCharactersInLanguage[row1]] = self.guessKey[self.listOfUniqueCharactersInLanguage[row2]]
+        self.guessKey[self.listOfUniqueCharactersInLanguage[row2]] = tempForSwap
 
     def __buildOneToOneMappingOfCharacters(self):
         for character in self.listOfUniqueCharactersInLanguage:
