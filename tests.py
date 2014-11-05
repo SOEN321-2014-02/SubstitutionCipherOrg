@@ -14,6 +14,7 @@ IDE: PhyCharm 3.4.1
 import random
 import unittest
 from digrammatrix import DigramMatrix
+from substitutionkey import SubstitutionKey
 import utils
 
 
@@ -23,3 +24,13 @@ class TestDigramMatrix(unittest.TestCase):
         #define unit test setup parameters
         test_matrix = DigramMatrix("Test")  # object to use for testing
 
+
+
+class TestSubstitutionKey(unittest.TestCase):
+
+    def setUp(self):
+        self.test_key = SubstitutionKey("Test")
+
+    def test_decrypt(self):
+        key = self.test_key
+        self.assertEqual(key.decrypt("test"), "test")
