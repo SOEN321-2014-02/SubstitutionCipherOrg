@@ -28,5 +28,8 @@ class MonogramMatrix:
     def get(self):
         return self.matrix
 
-    def getNumberOfUniqueCharacters(self):
-        return len(self.matrix)
+    def getListOfUniqueCharacters(self):
+        listOfUniqueCharacters = []
+        for key in self.matrix.keys():
+            listOfUniqueCharacters.append(key)
+        return listOfUniqueCharacters
