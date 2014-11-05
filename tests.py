@@ -66,4 +66,11 @@ class TestSubstitutionKey(unittest.TestCase):
         key.swap("t", "e")
         self.assertEqual(key.decrypt("test"), "ease")
 
+    def test_swap3(self):
+        key = self.test_key
+        first = key.keyValues['a']
+        second = key.keyValues['b']
+        key.swap('a', 'b')
+        self.assertEqual(first, key.keyValues['b'])
+        self.assertEqual(second, key.keyValues['a'])
 
