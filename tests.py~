@@ -23,3 +23,26 @@ class TestDigramMatrix(unittest.TestCase):
         #define unit test setup parameters
         test_matrix = DigramMatrix("Test")  # object to use for testing
 
+
+    def test_get_name(self):
+        #test get_name
+
+
+    def test_learn(self)):
+        #test learn(text)
+
+
+    def test_swap_rows(self):
+        #test swap_rows(row01, row02)
+
+
+    def test_swap_col(self):
+        #test swap_cols(col01, col02)
+
+
+    def test_compare_to(self):
+        #test compare_to(digrammatrix)
+
+
+    def test_print_string(self):
+        #test print_string()
