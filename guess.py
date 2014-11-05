@@ -3,34 +3,35 @@ __author__ = 'SOEN321-2014-02 Group: Connor Bode, Sid the Banzai Master, Eric Bo
 from random import randint
 
 class Guess:
-    def __init__(self, numberOfUniqueCharactersInLanguage, listOfCharactersInLanguage):
-        self.charactersInLanguage = numberOfUniqueCharactersInLanguage
-        self.guessKey = []
-        self.listOfCharactersInLanguage = listOfCharactersInLanguage
-        self.randomGuessAllCharacters()
+    def __init__(self, listOfUniqueCharactersInLanguage):
+        self.uniqueCharactersInLanguage = len(listOfUniqueCharactersInLanguage)
+        self.guessKey = {}
+        self.listOfUniqueCharactersInLanguage = listOfUniqueCharactersInLanguage
+        self.__buildOneToOneMappingOfCharacters()
 
     def set(self, initialGuessMatrix):
         return 1
 
     def randomGuessAllCharacters(self):
-        for i in range(0, self.charactersInLanguage):
-            randomValue = randint(0, self.charactersInLanguage-1)
+        self.guessKey = {}
+        for i in range(0, self.uniqueCharactersInLanguage):
+            randomValue = randint(0, self.uniqueCharactersInLanguage-1)
 
             #if this key value already exists in our list then we need to find a different one
-            while self.guessKey.count(randomValue) > 0:
-                randomValue = (randomValue + 1)%self.charactersInLanguage
+            while self.listOfUniqueCharactersInLanguage[randomValue] in self.guessKey.values():
+                randomValue = (randomValue + 1)%self.uniqueCharactersInLanguage
 
-            self.guessKey.append(randomValue)
+            self.guessKey[self.listOfUniqueCharactersInLanguage[i]] = self.listOfUniqueCharactersInLanguage[randomValue]
 
     def randomGuessOneCharacter(self):
         #Make sure we have enough rows to swap first
         if len(self.guessKey) > 1:
-            firstGuessRowToSwap = randint(0, self.charactersInLanguage-1)
-            secondGuessRowToSwap = randint(0, self.charactersInLanguage-1)
+            firstGuessRowToSwap = randint(0, self.uniqueCharactersInLanguage-1)
+            secondGuessRowToSwap = randint(0, self.uniqueCharactersInLanguage-1)
 
             #do not swap a row with itself, try guessing until we get two unique rows to swap
             while secondGuessRowToSwap == firstGuessRowToSwap:
-                secondGuessRowToSwap = (secondGuessRowToSwap + randint(0, self.charactersInLanguage-1))%self.charactersInLanguage
+                secondGuessRowToSwap = (secondGuessRowToSwap + randint(0, self.uniqueCharactersInLanguage-1))%self.uniqueCharactersInLanguage
 
             self.__swapRows(firstGuessRowToSwap, secondGuessRowToSwap)
 
@@ -41,3 +42,7 @@ class Guess:
         tempSwapVariable = self.guessKey[row1]
         self.guessKey[row1] = self.guessKey[row2]
         self.guessKey[row2] = tempSwapVariable
+
+    def __buildOneToOneMappingOfCharacters(self):
+        for character in self.listOfUniqueCharactersInLanguage:
+            self.guessKey[character] = character
