@@ -11,7 +11,7 @@ IDE: PhyCharm 3.4.1
 
 #import statements
 import utils
-
+import math
 
 class DigramMatrix:
     #define class variables
@@ -75,8 +75,11 @@ class DigramMatrix:
         print("Swapping Columns")
 
     def compare_to(self, digrammatrix):
-        #compare this matrix to another one
-        print("Comparing")
+        s = 0
+        for i in range(27):
+            for j in range(27):
+                s += math.fabs(self.matrix[i][j] - digrammatrix.matrix[i][j])
+        return s
 
     def print_string(self):
         for key01 in range(len(self.matrix)):
