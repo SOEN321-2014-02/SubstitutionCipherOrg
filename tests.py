@@ -28,3 +28,9 @@ class TestDigramMatrix(unittest.TestCase):
         self.assertEqual(m.get("a", "b"), 2)
         self.assertEqual(m.get("b", "a"), 1)
 
+    def test_compare_to(self):
+        m = self.test_matrix
+        m.learn("abab")
+        m2 = DigramMatrix("bla")
+        m2.learn("abaa")
+        self.assertEqual(m.compare_to(m2), 2)
