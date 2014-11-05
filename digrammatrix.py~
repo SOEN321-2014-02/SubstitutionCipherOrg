@@ -10,7 +10,6 @@ IDE: PhyCharm 3.4.1
 '''
 
 #import statements
-import numpy
 import utils
 
 

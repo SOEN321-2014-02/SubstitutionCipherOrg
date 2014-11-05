@@ -20,6 +20,8 @@ import utils
 class TestDigramMatrix(unittest.TestCase):
 
     def setUp(self):
-        #define unit test setup parameters
-        test_matrix = DigramMatrix("Test")  # object to use for testing
+        self.test_matrix = DigramMatrix("Test")  # object to use for testing
 
+    def test_learn(self):
+        self.test_matrix.learn("abcdefg")
+	
