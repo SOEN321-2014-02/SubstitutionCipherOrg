@@ -52,3 +52,4 @@ class TestSubstitutionKey(unittest.TestCase):
     def test_decrypt(self):
         key = self.test_key
         self.assertEqual(key.decrypt("test"), "test")
+        self.assertEqual(key.decrypt("TEst"), "test")  # test for decrypting uppercase strings
