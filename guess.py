@@ -3,12 +3,13 @@ __author__ = 'SOEN321-2014-02 Group: Connor Bode, Sid the Banzai Master, Eric Bo
 from random import randint
 
 class Guess:
-    def __init__(self, numberOfUniqueCharactersInLanguage):
+    def __init__(self, numberOfUniqueCharactersInLanguage, listOfCharactersInLanguage):
         self.charactersInLanguage = numberOfUniqueCharactersInLanguage
         self.guessKey = []
+        self.listOfCharactersInLanguage = listOfCharactersInLanguage
         self.randomGuessAllCharacters()
 
-    def setGuess(self, initialGuessMatrix):
+    def set(self, initialGuessMatrix):
         return 1
 
     def randomGuessAllCharacters(self):
