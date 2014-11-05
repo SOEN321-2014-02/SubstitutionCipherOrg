@@ -36,6 +36,13 @@ class TestDigramMatrix(unittest.TestCase):
         m2.learn("abaa")
         self.assertEqual(m.compare_to(m2), 2)
 
+    def test_swap(self):
+        m = self.test_matrix
+        m.learn("abab")
+        m.swap("a", "b")
+        self.assertEqual(m.get("a", "b"), 1)
+        self.assertEqual(m.get("b", "a"), 2)
+
 
 class TestSubstitutionKey(unittest.TestCase):
 
