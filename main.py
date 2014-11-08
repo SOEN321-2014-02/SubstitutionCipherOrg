@@ -56,11 +56,11 @@ english_language_matrix.learn(file_text)  # use text from file
   # - calculating the single character frequency matrix for the ciphertext
   # - comparing English single character matrix to ciphertext single character matrix
 #create experimental guess key
-mono_matrix = MonogramMatrix(file_to_read_object)
+mono_matrix = MonogramMatrix(file_name)
 guess_init = Guess(mono_matrix.getListOfUniqueCharacters())
 guess_init.randomGuessOneCharacter()
-print(guess_init.get())
-
+print(guess_init.get()) #*Debug to show guess matrix
+print(mono_matrix.get())   #*Debug to show mono frequeny matrix
 
 # iii) Calculate the Digram frequency matrix for the decrypted ciphertext
 #create decrypted ciphertext digram frequency matrix
