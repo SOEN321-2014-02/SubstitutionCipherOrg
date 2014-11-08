@@ -1,11 +1,10 @@
 from guess import Guess
 from monogrammatrix import MonogramMatrix
 
-f = open('erictest.txt','r')
-mmat = MonogramMatrix(f)
+mmat = MonogramMatrix('erictest.txt')
 #mmat.addCharacterAsMostCommon(' ')
 
 newGuess = Guess(mmat.getListOfUniqueCharacters())
 newGuess.randomGuessOneCharacter()
 
-print(newGuess.get())
+print(mmat.get())
