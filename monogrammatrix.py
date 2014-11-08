@@ -2,22 +2,23 @@ __author__ = 'SOEN321-2014-02 Group: Connor Bode, Sid the Banzai Master, Eric Bo
 
 class MonogramMatrix:
     #Arguments:
-    #	languageFileToBuildFrequencyMatrix is an already opened, readable file object
-    def __init__(self, languageFileToBuildFrequencyMatrix):
+    #	filenameToBuildFrequencyMatrix is a string representing the filename to use for building the matrix
+    def __init__(self, filenameToBuildFrequencyMatrix):
         self.matrix = {}
-        self.__learn(languageFileToBuildFrequencyMatrix)
+        self.__learn(filenameToBuildFrequencyMatrix)
 
-    def __learn(self, languageFileToBuildFrequencyMatrix):
-        #read the file by breaking it down by line
-        for line in languageFileToBuildFrequencyMatrix:
-            #now break the line down into individual characters
-            for character in line:
-                #ignore new lines because we do not care about them
-                if character != '\n':
-                    if character in self.matrix:
-                        self.matrix[character] += 1
-                    else:
-                        self.matrix[character] = 1
+    def __learn(self, filenameToBuildFrequencyMatrix):
+        with open('erictest.txt','r') as languageFileToBuildFrequencyMatrix:
+            #read the file by breaking it down by line
+            for line in languageFileToBuildFrequencyMatrix:
+                #now break the line down into individual characters
+                for character in line:
+                    #ignore new lines because we do not care about them
+                    if character != '\n':
+                        if character in self.matrix:
+                            self.matrix[character] += 1
+                        else:
+                            self.matrix[character] = 1
 
     def setCharacterAsMostCommon(self, characterToMakeMostCommon):
         #Finds the highest value in the dictionary, multiplies it by 2 and then sets the given character to this value
