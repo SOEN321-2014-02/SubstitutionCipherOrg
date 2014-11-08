@@ -12,6 +12,8 @@ IDE: PhyCharm 3.4.1
 #import statements
 from digrammatrix import DigramMatrix
 from substitutionkey import SubstitutionKey
+from guess import Guess
+from monogrammatrix import MonogramMatrix
 import sys
 
 #initialize file_name
@@ -47,13 +49,17 @@ english_language_matrix.learn(file_text)  # use text from file
 
 #* Debug - print matrix contents for ciphertext
 #english_language_matrix.print_string()
-english_language_matrix.print_table()
+#english_language_matrix.print_table()
 
 # ii) Create a guess key matrix called k
   # - (OPTIONAL) create the guess by:
   # - calculating the single character frequency matrix for the ciphertext
   # - comparing English single character matrix to ciphertext single character matrix
-#create experimental guess key digram frequency matrix
+#create experimental guess key
+mono_matrix = MonogramMatrix(file_to_read_object)
+guess_init = Guess(mono_matrix.getListOfUniqueCharacters())
+guess_init.randomGuessOneCharacter()
+print(guess_init.get())
 
 
 # iii) Calculate the Digram frequency matrix for the decrypted ciphertext
@@ -82,3 +88,7 @@ english_language_matrix.print_table()
 # xiii) assign D' to D
 
 # xiv) go back to step vii) and perform the swap again
+
+
+#close open file(s)
+file_to_read_object.close()

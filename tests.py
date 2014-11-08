@@ -2,7 +2,10 @@ __author__ = 'SOEN321-2014-02 Group: Connor Bode, Sid the Banzai Master, Eric Bo
 '''
 File: test-digrammatrix.py
 Description: Test class file to test digrammatrix class methods
-Reference: https://docs.python.org/3/library/unittest.html
+References:
+  - https://docs.python.org/3/library/unittest.html
+  - http://pythontesting.net/framework/unittest/unittest-introduction/
+Run as: python test.py -v
 File version:  0.0.1
 Date-created: 2014-11-01
 Last-update:  2014-11-01
@@ -81,3 +84,12 @@ class TestSubstitutionKey(unittest.TestCase):
         self.assertEqual(first, key.keyValues['b'])
         self.assertEqual(second, key.keyValues['a'])
 
+
+
+
+''' ----------- RUN UNIT TESTS --------------- '''
+def main():
+    unittest.main()
+
+if __name__ == '__main__':
+    main()
