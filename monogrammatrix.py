@@ -8,9 +8,11 @@ class MonogramMatrix:
         self.__learn(filenameToBuildFrequencyMatrix)
 
     def __learn(self, filenameToBuildFrequencyMatrix):
-        with open('erictest.txt','r') as languageFileToBuildFrequencyMatrix:
+        with open(filenameToBuildFrequencyMatrix,'r') as languageFileToBuildFrequencyMatrix:
             #read the file by breaking it down by line
             for line in languageFileToBuildFrequencyMatrix:
+                #treat upper and lower case characters as the same
+                line = line.lower()
                 #now break the line down into individual characters
                 for character in line:
                     #ignore new lines because we do not care about them
@@ -21,6 +23,7 @@ class MonogramMatrix:
                             self.matrix[character] = 1
 
     def setCharacterAsMostCommon(self, characterToMakeMostCommon):
+        characterToMakeMostCommon = characterToMakeMostCommon.lower
         #Finds the highest value in the dictionary, multiplies it by 2 and then sets the given character to this value
         self.matrix[characterToMakeMostCommon] = 2*self.matrix[max(self.matrix, key=self.matrix.get)]
 
