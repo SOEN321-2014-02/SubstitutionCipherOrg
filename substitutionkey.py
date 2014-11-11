@@ -23,8 +23,10 @@ class SubstitutionKey:
     def __init__(self, name):
         #define instance variables
         self.name = name  #substitution key name
-        #self.keyValues = {"a":"a", "b":"b", "c":"c" , "d":"d", "e":"e", "f":"f", "g":"g", "h":"h", "i":"i", "j":"j", "k":"k", "l":"l", "m":"m", "n":"n", "o":"o", "p":"p", "q":"q", "r":"r", "s":"s", "t":"t", "u":"u", "v":"v", "w":"w", "x":"x", "y":"y", "z":"z", " ":" "}
-        self.keyValues = {}
+        self.keyValues = {"a":"a", "b":"b", "c":"c" , "d":"d", "e":"e", "f":"f", "g":"g", "h":"h", "i":"i", "j":"j", "k":"k", "l":"l", "m":"m", "n":"n", "o":"o", "p":"p", "q":"q", "r":"r", "s":"s", "t":"t", "u":"u", "v":"v", "w":"w", "x":"x", "y":"y", "z":"z", " ":" "}
+
+    def set(self, key):
+        self.keyValues = key
 
     def create_guess(self, file_name):
         mono_matrix = MonogramMatrix(file_name)
@@ -38,6 +40,14 @@ class SubstitutionKey:
         for c in lowerCaseString:
             newString += self.keyValues[c]
         return newString
+
+    def encrypt(self, s):
+        s = s.lower()
+        inverse_key = {v: k for k, v in self.keyValues.items()}
+        new_string = ""
+        for c in s:
+            new_string += inverse_key[c]
+        return new_string
 
     def swap(self, character, value):
         tempValue = self.keyValues[character]
