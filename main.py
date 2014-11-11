@@ -14,60 +14,71 @@ from digrammatrix import DigramMatrix
 from substitutionkey import SubstitutionKey
 from guess import Guess
 from monogrammatrix import MonogramMatrix
+from random import randint
 import sys
 import copy
+import utils
 
 #initialize file_name
 file_name = ""
 #file_name = "ciphertext.txt"   #*Debug - filename for importing
 
 #get filename from command line arguments
-if len(sys.argv) > 1:
-    file_name = sys.argv[1]
-    #print(file_name)
-else:
-    if file_name is "":
-        print("Filename required")
-        exit()
+if len(sys.argv) < 1:
+  print("Usage: ")
+  print("  python3 main.py <ciphertext> <training_text>")
+  print("    - <ciphertext> The location of the file containing ciphertext")
+  print("    - <training_text> The location of the file containing the training text")
+  sys.exit()
 
-#open file for reading
+file_name = sys.argv[1]
+training_text_file_location = sys.argv[2]
+
+
+# read in ciphertext
 file_to_read_object = open(file_name, 'r')
-#read text from file
 file_text = file_to_read_object.read()
+file_to_read_object.close()
 
 
-## algorithm steps ##
-# i) Import an English language frequency matrix (26 char plus space)
-#create english language digram frequency matrix
-cipertext_matrix = DigramMatrix("Ciphertext")
+# train english digram matrix
+base_matrix = DigramMatrix("English")
+with open(training_text_file_location, 'r') as training_text:
+  text = training_text.read()
+  normalized_text = utils.normalize(text)
+  base_matrix.learn(normalized_text)
 
-#create substitution key
-#sub_key = SubstitutionKey("Key")
 
-#send text to matrix
-#english_language_matrix.learn("this is some text that I am including at")  # test with text
-cipertext_matrix.learn(file_text)  # use text from file
+# generate initial guess
+key = SubstitutionKey("Guess key")
+current_decryption = key.decrypt(file_text)
+ciphertext_matrix = DigramMatrix("Ciphertext")
+ciphertext_matrix.learn(current_decryption)
 
-#* Debug - print matrix contents for ciphertext
-#cipertext_matrix.print_string()
-#cipertext_matrix.print_table()
 
-# ii) Create a guess key matrix called k
-  # - (OPTIONAL) create the guess by:
-  # - calculating the single character frequency matrix for the ciphertext
-  # - comparing English single character matrix to ciphertext single character matrix
-#assign the guess key as the initial substitution key
-k = SubstitutionKey("Guess key")
-k.create_guess(file_name)
+# compute initial difference & deep copy the key
+current_bigram_difference = base_matrix.compare_to(ciphertext_matrix)
+key_copy = copy.deepcopy(key)
+ciphertext_matrix_copy = copy.deepcopy(ciphertext_matrix)
 
-# iii) Calculate the Digram frequency matrix for the decrypted ciphertext
-#create decrypted ciphertext digram frequency matrix
-decrypted_digram = DigramMatrix("Decrypted Text")
-decrypted_digram.learn(k.decrypt(file_text))
-decrypted_digram.print_table()
 
-# iv) Perform a matrix addition function on the ciphertext Digram frequency matrix  and the English Digram frequency matrix and assign result to v
-# v =
+# start solving .. 
+for i in range(0, 1000):
+
+  # pick a random a and b
+  alpha_seed = randint(0, 26)
+  beta_seed = randint(0, 26)
+  alpha = utils.element_to_char(alpha_seed)
+  beta = utils.element_to_char(beta_seed)
+
+  # swap rows / cols in key & matrix
+  key_copy.swap(alpha, beta)
+  ciphertext_matrix_copy.swap(alpha, beta)
+
+  # compute difference
+  bigram_difference = base_matrix.compare_to(ciphertext_matrix_copy)
+  print(bigram_difference)
+
 
 # v) take the guess key k and copy it to a second variable called k'
 
