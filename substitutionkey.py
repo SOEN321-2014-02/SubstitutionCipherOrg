@@ -10,6 +10,8 @@ IDE: PhyCharm 3.4.1
 '''
 
 #import statements
+from guess import Guess
+from monogrammatrix import MonogramMatrix
 import utils
 
 
@@ -21,8 +23,14 @@ class SubstitutionKey:
     def __init__(self, name):
         #define instance variables
         self.name = name  #substitution key name
-        self.keyValues = {"a":"a", "b":"b", "c":"c" , "d":"d", "e":"e", "f":"f", "g":"g", "h":"h", "i":"i", "j":"j", "k":"k", "l":"l", "m":"m", "n":"n", "o":"o", "p":"p", "q":"q", "r":"r", "s":"s", "t":"t", "u":"u", "v":"v", "w":"w", "x":"x", "y":"y", "z":"z", " ":" "}
+        #self.keyValues = {"a":"a", "b":"b", "c":"c" , "d":"d", "e":"e", "f":"f", "g":"g", "h":"h", "i":"i", "j":"j", "k":"k", "l":"l", "m":"m", "n":"n", "o":"o", "p":"p", "q":"q", "r":"r", "s":"s", "t":"t", "u":"u", "v":"v", "w":"w", "x":"x", "y":"y", "z":"z", " ":" "}
+        self.keyValues = {}
 
+    def create_guess(self, file_name):
+        mono_matrix = MonogramMatrix(file_name)
+        guess_init = Guess(mono_matrix.getListOfUniqueCharacters())
+        guess_init.randomGuessOneCharacter()
+        return guess_init.get()
 
     def decrypt(self, oldString):
         lowerCaseString = oldString.lower()
@@ -30,7 +38,6 @@ class SubstitutionKey:
         for c in lowerCaseString:
             newString += self.keyValues[c]
         return newString
-
 
     def swap(self, character, value):
         tempValue = self.keyValues[character]

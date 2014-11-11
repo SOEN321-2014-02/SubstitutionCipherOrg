@@ -90,12 +90,21 @@ class DigramMatrix:
         #print top row with column headers
         print("  | ", end="")
         for key01 in range(len(self.matrix)):
-            print(str(key01) + " | ", end="")
+            if key01 is 0:
+                key = "_"
+            else:
+                key = utils.element_to_char(key01)
+            print(key + " | ", end="")
         print(" ")
+        print("-----------------------------------------------------------------------------------------------------------------")
 
         #print each row
         for key01 in range(len(self.matrix)):
-            print (str(key01) + " | ", end="")
+            if key01 is 0:
+                key = "_"
+            else:
+                key = utils.element_to_char(key01)
+            print(key + " | ", end="")
             for key02 in range(len(self.matrix)):
                 value = self.matrix[key01][key02]
                 print(str(value) + " | ", end="")
