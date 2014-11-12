@@ -47,7 +47,7 @@ file_to_read_object.close()
 # train english matrixes
 base_matrix = DigramMatrix("English")
 english_monograms = MonogramMatrix()
-with open(training_text_file_location, 'r') as training_text:
+with open(training_text_file_location, 'r', -1, 'utf-8', 'replace') as training_text:
   text = training_text.read()
   normalized_text = utils.normalize(text)
   base_matrix.learn(normalized_text)
@@ -79,9 +79,9 @@ b = 0
 for i in range(0, 10000):
 
   # pick a and b
-  print("a:" + str(a))
-  print("b:" + str(b))
-  print("diff: " + str(current_bigram_difference))
+  # print("a:" + str(a))
+  # print("b:" + str(b))
+  # print("diff: " + str(current_bigram_difference))
   monogram_matrix = MonogramMatrix()
   monogram_matrix.learn(key.decrypt(file_text))
   decreasing_vector = monogram_matrix.get_decreasing_vector()
