@@ -22,6 +22,16 @@ class MonogramMatrix:
                         else:
                             self.matrix[character] = 1
 
+    def learn(self, text):
+        for character in text:
+            if character in self.matrix:
+                self.matrix[character] += 1
+            else:
+                self.matrix[character] = 1
+
+    def get_decreasing_vector(self):
+        return sorted(self.matrix, key=self.matrix.get)
+
     def setCharacterAsMostCommon(self, characterToMakeMostCommon):
         characterToMakeMostCommon = characterToMakeMostCommon.lower
         #Finds the highest value in the dictionary, multiplies it by 2 and then sets the given character to this value

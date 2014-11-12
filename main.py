@@ -63,7 +63,7 @@ ciphertext_matrix_copy = copy.deepcopy(ciphertext_matrix)
 
 
 # start solving .. 
-for i in range(0, 1000000):
+for i in range(0, 10000):
 
   # pick a random a and b
   alpha_seed = randint(0, 26)
