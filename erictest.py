@@ -1,10 +1,16 @@
 from guess import Guess
 from monogrammatrix import MonogramMatrix
 
-mmat = MonogramMatrix('erictest.txt')
-#mmat.addCharacterAsMostCommon(' ')
+monoMatrixOfLanguageFrequencies = MonogramMatrix('erictest.txt')
+monoMatrixOfLanguageFrequencies.setCharacterAsMostCommon(' ')
 
-newGuess = Guess(mmat.getListOfUniqueCharacters())
+newGuess = Guess(monoMatrixOfLanguageFrequencies.getListOfUniqueCharacters())
 newGuess.randomGuessOneCharacter()
 
-print(mmat.get())
+monoMapping = monoMatrixOfLanguageFrequencies.generateMappingBasedOnFrequencies('text_pairs/1.ciphertext.txt')
+newGuess.setGuess(monoMapping)
+print(monoMapping)
+
+#print(monoMatrixOfLanguageFrequencies.get())
+#can do a bucket for dictionary?
+
