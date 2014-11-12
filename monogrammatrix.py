@@ -7,7 +7,7 @@ class MonogramMatrix:
         self.matrix = {}
         self.uniqueCharactersInFrequencyMatrix = 0
         self.sumOfFrequencies = 0
-        self.__learn(filenameToBuildFrequencyMatrix)
+        # self.__learn(filenameToBuildFrequencyMatrix)
 
     def __learn(self, filenameToBuildFrequencyMatrix):
         with open(filenameToBuildFrequencyMatrix,'r') as languageFileToBuildFrequencyMatrix:
@@ -45,14 +45,16 @@ class MonogramMatrix:
         return generatedMapping
 
     def learn(self, text):
+        chars = list("abcdefghijklmnopqrstuvwxyz ")
+        for c in chars:
+          self.matrix[c] = 0
         for character in text:
-            if character in self.matrix:
-                self.matrix[character] += 1
-            else:
-                self.matrix[character] = 1
+          self.matrix[character] += 1
 
     def get_decreasing_vector(self):
-        return sorted(self.matrix, key=self.matrix.get)
+        x = sorted(self.matrix, key=self.matrix.get)
+        x.reverse()
+        return x
 
     def setCharacterAsMostCommon(self, characterToMakeMostCommon):
         if characterToMakeMostCommon >= 'A' and characterToMakeMostCommon <= 'Z':

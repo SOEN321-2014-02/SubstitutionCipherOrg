@@ -24,11 +24,13 @@ file_name = ""
 #file_name = "ciphertext.txt"   #*Debug - filename for importing
 
 #get filename from command line arguments
-if len(sys.argv) < 1:
+if len(sys.argv) < 3:
+  print()
   print("Usage: ")
   print("  python3 main.py <ciphertext> <training_text>")
   print("    - <ciphertext> The location of the file containing ciphertext")
   print("    - <training_text> The location of the file containing the training text")
+  print()
   sys.exit()
 
 file_name = sys.argv[1]
@@ -60,24 +62,40 @@ ciphertext_matrix.learn(current_decryption)
 current_bigram_difference = base_matrix.compare_to(ciphertext_matrix)
 key_copy = copy.deepcopy(key)
 ciphertext_matrix_copy = copy.deepcopy(ciphertext_matrix)
-
+a = 0
+b = 0
 
 # start solving .. 
 for i in range(0, 10000):
 
-  # pick a random a and b
-  alpha_seed = randint(0, 26)
-  beta_seed = randint(0, 26)
-  alpha = utils.element_to_char(alpha_seed)
-  beta = utils.element_to_char(beta_seed)
+  # pick a and b
+  print("a:" + str(a))
+  print("b:" + str(b))
+  print("diff: " + str(current_bigram_difference))
+  monogram_matrix = MonogramMatrix('')
+  monogram_matrix.learn(key.decrypt(file_text))
+  decreasing_vector = monogram_matrix.get_decreasing_vector()
+  alpha = decreasing_vector[a]
+  beta = decreasing_vector[a+b]
 
   # swap rows / cols in key & matrix
   key_copy.swap(alpha, beta)
   ciphertext_matrix_copy.swap(alpha, beta)
 
+  # continue computation of step 6
+  a += 1
+  if (a + b) > 26:
+    a = 0
+    b += 1
+    if b == 26:
+      print(key.decrypt(file_text))
+      sys.exit()
+
   # compute difference
   bigram_difference = base_matrix.compare_to(ciphertext_matrix_copy)
   if bigram_difference < current_bigram_difference:
+    a = 0
+    b = 0
     current_bigram_difference = bigram_difference
     print(current_bigram_difference)
     key = key_copy
@@ -86,6 +104,8 @@ for i in range(0, 10000):
   # deep copy
   key_copy = copy.deepcopy(key)
   ciphertext_matrix_copy = copy.deepcopy(ciphertext_matrix)
+
+
 
 
 
