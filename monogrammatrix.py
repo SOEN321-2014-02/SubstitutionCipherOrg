@@ -1,18 +1,19 @@
 __author__ = 'SOEN321-2014-02 Group: Connor Bode, Sid the Banzai Master, Eric Bozikian, Norman Mirotchnick'
 
+from pprint import pprint 
+
 class MonogramMatrix:
     #Arguments:
     #	filenameToBuildFrequencyMatrix is a string representing the filename to use for building the matrix
-    def __init__(self, filenameToBuildFrequencyMatrix):
+    def __init__(self):
         self.matrix = {}
         self.uniqueCharactersInFrequencyMatrix = 0
         self.sumOfFrequencies = 0
-        # self.__learn(filenameToBuildFrequencyMatrix)
 
-    def __learn(self, filenameToBuildFrequencyMatrix):
-        with open(filenameToBuildFrequencyMatrix,'r') as languageFileToBuildFrequencyMatrix:
-            #read the file by breaking it down by line
-            for line in languageFileToBuildFrequencyMatrix:
+    def learn_from_file(self, line):
+        # with open(filenameToBuildFrequencyMatrix,'r') as languageFileToBuildFrequencyMatrix:
+        #     #read the file by breaking it down by line
+        #     for line in languageFileToBuildFrequencyMatrix:
                 #now break the line down into individual characters
                 for character in line:
                     #ignore new lines because we do not care about them
@@ -29,7 +30,8 @@ class MonogramMatrix:
 
     def generateMappingBasedOnFrequencies(self, filenameOfCipherText):
         generatedMapping = {}
-        cipherMonogram = MonogramMatrix(filenameOfCipherText)
+        cipherMonogram = MonogramMatrix()
+        cipherMonogram.learn_from_file(filenameOfCipherText)
 
         matrixListSorted = sorted(self.matrix, key=self.matrix.get, reverse=True)
         cipherListSorted = sorted(cipherMonogram.get(), key=cipherMonogram.get().get, reverse=True)
@@ -41,6 +43,15 @@ class MonogramMatrix:
 
         for i in range(0, endValueForLoop):
             generatedMapping[cipherListSorted[i]] = matrixListSorted[i]
+
+        required = list("abcdefghijklmnopqrstuvwxyz ")
+        accounted_keys = generatedMapping.keys()
+        missing_keys = list(set(required) - set(accounted_keys))
+        accounted_values = [v for k, v in generatedMapping.items()]
+        missing_values = list(set(required) - set(accounted_values))
+
+        for i, v in enumerate(missing_keys):
+          generatedMapping[v] = missing_values[i]
 
         return generatedMapping
 

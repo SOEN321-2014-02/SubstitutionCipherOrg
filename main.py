@@ -15,6 +15,7 @@ from substitutionkey import SubstitutionKey
 from guess import Guess
 from monogrammatrix import MonogramMatrix
 from random import randint
+from pprint import pprint
 import sys
 import copy
 import utils
@@ -43,16 +44,25 @@ file_text = file_to_read_object.read()
 file_to_read_object.close()
 
 
-# train english digram matrix
+# train english matrixes
 base_matrix = DigramMatrix("English")
+english_monograms = MonogramMatrix()
 with open(training_text_file_location, 'r') as training_text:
   text = training_text.read()
   normalized_text = utils.normalize(text)
   base_matrix.learn(normalized_text)
+  english_monograms.learn(normalized_text)
 
 
 # generate initial guess
 key = SubstitutionKey("Guess key")
+english_monograms.setCharacterAsMostCommon(' ')
+guess = Guess(english_monograms.getListOfUniqueCharacters())
+guess.randomGuessOneCharacter()
+guess_mapping = english_monograms.generateMappingBasedOnFrequencies(file_text)
+guess.setGuess(guess_mapping)
+key.set(guess.get())
+
 current_decryption = key.decrypt(file_text)
 ciphertext_matrix = DigramMatrix("Ciphertext")
 ciphertext_matrix.learn(current_decryption)
@@ -72,7 +82,7 @@ for i in range(0, 10000):
   print("a:" + str(a))
   print("b:" + str(b))
   print("diff: " + str(current_bigram_difference))
-  monogram_matrix = MonogramMatrix('')
+  monogram_matrix = MonogramMatrix()
   monogram_matrix.learn(key.decrypt(file_text))
   decreasing_vector = monogram_matrix.get_decreasing_vector()
   alpha = decreasing_vector[a]
