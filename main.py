@@ -19,6 +19,7 @@ from pprint import pprint
 import sys
 import copy
 import utils
+import ast
 
 #initialize file_name
 file_name = ""
@@ -28,14 +29,22 @@ file_name = ""
 if len(sys.argv) < 3:
   print()
   print("Usage: ")
-  print("  python3 main.py <ciphertext> <training_text>")
+  print("  python3 main.py <ciphertext> <training_text> [actual_key]")
   print("    - <ciphertext> The location of the file containing ciphertext")
   print("    - <training_text> The location of the file containing the training text")
+  print("    - [actual_key] The actual key used to encrypt the ciphertext")
   print()
   sys.exit()
 
 file_name = sys.argv[1]
 training_text_file_location = sys.argv[2]
+actual_key = None
+
+# read in the actual key
+if len(sys.argv) > 3:
+  with open(sys.argv[3], 'r') as actual_key_file:
+    actual_key_text = actual_key_file.read()
+    actual_key = ast.literal_eval(actual_key_text)
 
 
 # read in ciphertext
@@ -62,6 +71,10 @@ guess.randomGuessOneCharacter()
 guess_mapping = english_monograms.generateMappingBasedOnFrequencies(file_text)
 guess.setGuess(guess_mapping)
 key.set(guess.get())
+if actual_key:
+  pprint(actual_key)
+  pprint(guess_mapping)
+  print("score: " + str(utils.compare_keys(actual_key, guess_mapping)))
 
 current_decryption = key.decrypt(file_text)
 ciphertext_matrix = DigramMatrix("Ciphertext")
@@ -72,18 +85,18 @@ ciphertext_matrix.learn(current_decryption)
 current_bigram_difference = base_matrix.compare_to(ciphertext_matrix)
 key_copy = copy.deepcopy(key)
 ciphertext_matrix_copy = copy.deepcopy(ciphertext_matrix)
-a = 0
-b = 0
+a = 1
+b = 1
 
 # start solving .. 
-for i in range(0, 10000):
+while True:
 
   # pick a and b
   # print("a:" + str(a))
   # print("b:" + str(b))
   # print("diff: " + str(current_bigram_difference))
   monogram_matrix = MonogramMatrix()
-  monogram_matrix.learn(key.decrypt(file_text))
+  monogram_matrix.learn(file_text)
   decreasing_vector = monogram_matrix.get_decreasing_vector()
   alpha = decreasing_vector[a]
   beta = decreasing_vector[a+b]
@@ -95,7 +108,7 @@ for i in range(0, 10000):
   # continue computation of step 6
   a += 1
   if (a + b) > 26:
-    a = 0
+    a = 1
     b += 1
     if b == 26:
       print(key.decrypt(file_text))
@@ -104,10 +117,11 @@ for i in range(0, 10000):
   # compute difference
   bigram_difference = base_matrix.compare_to(ciphertext_matrix_copy)
   if bigram_difference < current_bigram_difference:
-    a = 0
-    b = 0
+    a = 1
+    b = 1
     current_bigram_difference = bigram_difference
-    print(current_bigram_difference)
+    print('bigram difference: ' + str(current_bigram_difference))
+    print('score: ' + str(utils.compare_keys(actual_key, key_copy.keyValues)))
     key = key_copy
     ciphertext_matrix = ciphertext_matrix_copy
 

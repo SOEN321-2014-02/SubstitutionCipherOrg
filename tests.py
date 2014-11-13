@@ -45,6 +45,22 @@ class TestDigramMatrix(unittest.TestCase):
         m.swap("a", "b")
         self.assertEqual(m.get("a", "b"), 1)
         self.assertEqual(m.get("b", "a"), 2)
+        
+    def test_swap_2(self):
+        m = self.test_matrix
+        m.learn("abbcccdddd")
+        self.assertEqual(m.get("b", "c"), 1)
+        m.swap("a", "d")
+        self.assertEqual(m.get("a", "a"), 3)
+        self.assertEqual(m.get("b", "b"), 1)
+        self.assertEqual(m.get("c", "a"), 1)
+        self.assertEqual(m.get("c", "c"), 2)
+        m.swap("c", "d")
+        self.assertEqual(m.get("a", "a"), 3)
+        self.assertEqual(m.get("d", "a"), 1)
+        self.assertEqual(m.get("d", "d"), 2)
+        self.assertEqual(m.get("b", "d"), 1)
+        
 
 
 class TestUtils(unittest.TestCase):

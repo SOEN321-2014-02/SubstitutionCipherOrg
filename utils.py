@@ -64,3 +64,13 @@ def normalize(text):
         if c in accepted_chars:
             normalized_text += c
     return normalized_text
+
+
+# determines the number of matching
+# elements between two dictionaries
+def compare_keys(actual, expected):
+  score = 0
+  for k, v in actual.items():
+    if v == expected[k]:
+      score += 1
+  return score
