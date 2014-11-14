@@ -1,2 +1,7 @@
 *.pyc
+<<<<<<< Updated upstream
 *.py~
+=======
+/.idea/
+/python.exe
+>>>>>>> Stashed changes
