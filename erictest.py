@@ -3,7 +3,7 @@ from monogrammatrix import MonogramMatrix
 from accuracyofdecryption import AccuracyOfDecryption
 
 mono = MonogramMatrix()
-mono.learn_from_file('erictest.txt')
+mono.learn_from_file('training_corpora/english_word_list.txt')
 mono.setCharacterAsMostCommon(' ')
 
 newGuess = Guess(mono.getListOfUniqueCharacters())
@@ -13,7 +13,7 @@ newGuess.randomGuessOneCharacter()
 #newGuess.setGuess(monoMapping)
 #print(monoMapping)
 
-accOfDec = AccuracyOfDecryption('erictest.txt')
+accOfDec = AccuracyOfDecryption('training_corpora/english_word_list.txt')
 accurateResultsCount = accOfDec.getCountOfAccurateWords('hi my name is eric shady\ncats\tare what?  I taught eminem')
 print(accurateResultsCount)
 
