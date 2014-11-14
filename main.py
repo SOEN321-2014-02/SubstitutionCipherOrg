@@ -121,7 +121,8 @@ while True:
     b = 1
     current_bigram_difference = bigram_difference
     print('bigram difference: ' + str(current_bigram_difference))
-    print('score: ' + str(utils.compare_keys(actual_key, key_copy.keyValues)))
+    if actual_key:
+      print('score: ' + str(utils.compare_keys(actual_key, key_copy.keyValues)))
     key = key_copy
     ciphertext_matrix = ciphertext_matrix_copy
 
