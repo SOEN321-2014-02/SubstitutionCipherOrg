@@ -42,6 +42,7 @@ class DigramMatrix:
         return self.name
 
     def learn(self, text):
+        self.length = len(text)
         counter = 0  #initialize counter
         while counter < len(text)-1:
             char01 = text[counter].lower()
@@ -72,11 +73,11 @@ class DigramMatrix:
             self.matrix[s][i] = tmp
 
     def compare_to(self, digrammatrix):
-        s = 0
+        diff = 0
         for i in range(27):
             for j in range(27):
-                s += math.fabs(self.matrix[i][j] - digrammatrix.matrix[i][j])
-        return s
+                diff += math.fabs(self.matrix[i][j]/self.length - digrammatrix.matrix[i][j]/digrammatrix.length)
+        return diff
 
     def print_string(self):
         for key01 in range(len(self.matrix)):
