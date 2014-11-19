@@ -54,9 +54,8 @@ class SubstitutionKey:
 
     def swap(self, character, value):
         tempValue = self.keyValues[character]
-        self.keyValues[character] = value
+        self.keyValues[character] = self.keyValues[value]
         self.keyValues[value] = tempValue
-
 
     def reset_key(self):
         return 1
