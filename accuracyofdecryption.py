@@ -28,8 +28,30 @@ class AccuracyOfDecryption:
 
         for currentWord in whitespaceSeperatedDecryptedText:
             currentWord = currentWord.lower()
-            if len(currentWord) > 0:
+            currentWordLength = len(currentWord)
+            if currentWordLength > 0:
                 if currentWord in self.dictionaryBucket[currentWord[0]]:
                     countOfAccurateWords += 1
 
         return countOfAccurateWords
+
+    def getCountOfAccurateWordsByLength(self, decryptedText):
+        accurateWordsByLength = {}
+
+        whitespaceSeperatedDecryptedText = re.split('\s', decryptedText)
+
+        for currentWord in whitespaceSeperatedDecryptedText:
+            currentWord = currentWord.lower()
+            currentWordLength = len(currentWord)
+            if currentWordLength > 0:
+                if currentWord in self.dictionaryBucket[currentWord[0]]:
+                    if currentWordLength in accurateWordsByLength.keys():
+                        accurateWordsByLength[currentWordLength][0] += 1
+                    else:
+                        accurateWordsByLength[currentWordLength] = [1, 0]
+                accurateWordsByLength[currentWordLength][1] += 1
+
+        return accurateWordsByLength
+
+    def getAccuracyPercentage(self, decryptedText):
+        return (self.getCountOfAccurateWords(self, decryptedText)/len(re.split('\s', decryptedText)))*100
