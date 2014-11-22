@@ -27,6 +27,7 @@ class MonogramMatrix:
                         else:
                             self.matrix[character] = 1
                             self.uniqueCharactersInFrequencyMatrix += 1
+                print("done")
 
     def generateMappingBasedOnFrequencies(self, filenameOfCipherText):
         generatedMapping = {}
@@ -84,7 +85,7 @@ class MonogramMatrix:
         listOfUniqueCharacters = []
         for key in self.matrix.keys():
             listOfUniqueCharacters.append(key)
-        return listOfUniqueCharacters
+        return sorted(listOfUniqueCharacters)
 
     def getSumOfFrequencies(self):
         return self.sumOfFrequencies

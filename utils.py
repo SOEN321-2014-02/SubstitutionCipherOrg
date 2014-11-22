@@ -61,6 +61,8 @@ def normalize(text):
     accepted_chars = ' abcdefghijklmnopqrstuvwxyz'
     text = text.lower()
     for c in text:
+        if c == "\n":
+            c = " "
         if c in accepted_chars:
             normalized_text += c
     return normalized_text
