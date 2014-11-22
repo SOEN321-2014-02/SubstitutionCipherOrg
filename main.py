@@ -71,7 +71,6 @@ guess = Guess(english_monograms.getListOfUniqueCharacters())
 guess_mapping = english_monograms.generateMappingBasedOnFrequencies(file_text)
 guess.setGuess(guess_mapping)
 key.set(guess.get())
-key.__str__()
 if actual_key:
     pprint(actual_key)
     pprint(guess_mapping)
@@ -129,9 +128,9 @@ while True:
         b = 1
         current_bigram_difference = bigram_difference
 
-        # copy key and matrix to prepare for next round
-        key = key_copy
-        ciphertext_matrix = ciphertext_matrix_copy
+        # copy new valid key and new valid matrix to prepare for next round
+        key = copy.deepcopy(key_copy)
+        ciphertext_matrix = copy.deepcopy(ciphertext_matrix_copy)
 
     # provide status output
     print('current bigram difference: ' + str(current_bigram_difference))

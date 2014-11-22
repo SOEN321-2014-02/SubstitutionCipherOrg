@@ -27,7 +27,6 @@ class MonogramMatrix:
                         else:
                             self.matrix[character] = 1
                             self.uniqueCharactersInFrequencyMatrix += 1
-                print("done")
 
     def generateMappingBasedOnFrequencies(self, filenameOfCipherText):
         generatedMapping = {}

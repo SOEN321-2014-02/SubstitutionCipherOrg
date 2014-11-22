@@ -10,7 +10,7 @@ class Guess:
         self.__buildOneToOneMappingOfCharacters()
 
     def setGuess(self, guessDictionary):
-        self.guessKey =  guessDictionary
+        self.guessKey = guessDictionary
 
     def setListOfUniqueCharactersInLanguage(self, listOfUniqueCharactersInLanguage):
         self.uniqueCharactersInLanguage = len(listOfUniqueCharactersInLanguage)

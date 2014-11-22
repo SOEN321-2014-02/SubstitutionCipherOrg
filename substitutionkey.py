@@ -59,5 +59,3 @@ class SubstitutionKey:
 
     def reset_key(self):
         return 1
-
-
