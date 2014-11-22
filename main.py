@@ -67,10 +67,11 @@ with open(training_text_file_location, 'r', -1, 'utf-8', 'replace') as training_
 key = SubstitutionKey("Guess key")
 english_monograms.setCharacterAsMostCommon(' ')
 guess = Guess(english_monograms.getListOfUniqueCharacters())
-guess.randomGuessOneCharacter()
+#guess.randomGuessOneCharacter()
 guess_mapping = english_monograms.generateMappingBasedOnFrequencies(file_text)
 guess.setGuess(guess_mapping)
 key.set(guess.get())
+key.__str__()
 if actual_key:
     pprint(actual_key)
     pprint(guess_mapping)
@@ -83,6 +84,7 @@ ciphertext_matrix.learn(current_decryption)
 
 # compute initial difference & deep copy the key
 current_bigram_difference = base_matrix.compare_to(ciphertext_matrix)
+print("starting bigram difference: " + str(current_bigram_difference))
 key_copy = copy.deepcopy(key)
 ciphertext_matrix_copy = copy.deepcopy(ciphertext_matrix)
 a = 1
@@ -98,8 +100,9 @@ while True:
     monogram_matrix = MonogramMatrix()
     monogram_matrix.learn(file_text)
     decreasing_vector = monogram_matrix.get_decreasing_vector()
-    alpha = decreasing_vector[a - 1]
-    beta = decreasing_vector[(a + b) - 1]
+    alpha = decreasing_vector[a]
+    beta = decreasing_vector[(a + b)]
+    print("a,b: " + str(a) + "," + str(b) + " | " + "alpha:" + alpha + ", beta:" + beta)
 
     # swap rows / cols in key & matrix
     key_copy.swap(alpha, beta)
@@ -107,10 +110,15 @@ while True:
 
     # continue computation of step 6
     a += 1
-    if (a + b) > 27:
+    if (a + b) > 26:
         a = 1
         b += 1
-        if b == 27:
+        if b == 26:
+            print("terminating..")
+            # provide status output
+            print('current bigram difference: ' + str(current_bigram_difference))
+            if actual_key:
+                print('score: ' + str(utils.compare_keys(actual_key, key_copy.keyValues)))
             print(key.decrypt(file_text))
             sys.exit()
 
@@ -120,18 +128,19 @@ while True:
         a = 1
         b = 1
         current_bigram_difference = bigram_difference
-        print('bigram difference: ' + str(current_bigram_difference))
-        if actual_key:
-            print('score: ' + str(utils.compare_keys(actual_key, key_copy.keyValues)))
+
+        # copy key and matrix to prepare for next round
         key = key_copy
         ciphertext_matrix = ciphertext_matrix_copy
+
+    # provide status output
+    print('current bigram difference: ' + str(current_bigram_difference))
+    if actual_key:
+        print('score: ' + str(utils.compare_keys(actual_key, key_copy.keyValues)))
 
     # deep copy
     key_copy = copy.deepcopy(key)
     ciphertext_matrix_copy = copy.deepcopy(ciphertext_matrix)
-
-
-
 
 
 
